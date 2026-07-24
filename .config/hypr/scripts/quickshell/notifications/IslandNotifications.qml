@@ -204,7 +204,7 @@ PanelWindow {
                         Text {
                             anchors.centerIn: parent
                             text: "󰵙"
-                            font.family: "Iosevka Nerd Font"
+                            font.family: "SF Pro Text"
                             font.pixelSize: s(14)
                             color: mocha.mauve
                             visible: parent.children[0].status !== Image.Ready
@@ -233,7 +233,7 @@ PanelWindow {
                     // Notification counter
                     Text {
                         text: notificationQueue > 1 ? notificationQueue.toString() : ""
-                        font.family: "JetBrains Mono"
+                        font.family: "SF Pro Text"
                         font.pixelSize: s(12)
                         font.weight: Font.Bold
                         color: mocha.text
@@ -302,7 +302,7 @@ PanelWindow {
                         Text {
                             anchors.centerIn: parent
                             text: "󰵙"
-                            font.family: "Iosevka Nerd Font"
+                            font.family: "SF Pro Text"
                             font.pixelSize: s(24)
                             color: mocha.mauve
                             visible: appIcon.status !== Image.Ready
@@ -321,7 +321,7 @@ PanelWindow {
                         Text {
                             width: parent.width
                             text: currentNotification ? currentNotification.appName : ""
-                            font.family: "JetBrains Mono"
+                            font.family: "SF Pro Text"
                             font.pixelSize: s(11)
                             font.weight: Font.Medium
                             color: mocha.overlay1
@@ -332,7 +332,7 @@ PanelWindow {
                         Text {
                             width: parent.width
                             text: currentNotification ? currentNotification.title : ""
-                            font.family: "JetBrains Mono"
+                            font.family: "SF Pro Text"
                             font.pixelSize: s(14)
                             font.weight: Font.Bold
                             color: mocha.text
@@ -343,7 +343,7 @@ PanelWindow {
                         Text {
                             width: parent.width
                             text: currentNotification ? currentNotification.body : ""
-                            font.family: "JetBrains Mono"
+                            font.family: "SF Pro Text"
                             font.pixelSize: s(12)
                             color: mocha.subtext0
                             elide: Text.ElideRight

@@ -25,7 +25,7 @@ Row {
         spacing: -1; anchors.verticalCenter: parent.verticalCenter
         Text {
             text: island.isRecordingPaused ? "PAUSED" : "REC"
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Black
+            font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Black
             font.letterSpacing: island.s(2)
             color: island.isRecordingPaused ? island.subtext0 : island.red
             Behavior on color { ColorAnimation { duration: 200 } }
@@ -37,7 +37,7 @@ Row {
                 let s2 = total % 60
                 return (m < 10 ? "0" + m : m) + ":" + (s2 < 10 ? "0" + s2 : s2)
             }
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(11); font.weight: Font.Bold
+            font.family: "SF Pro Text"; font.pixelSize: island.s(11); font.weight: Font.Bold
             color: island.isRecordingPaused
                 ? Qt.rgba(island.subtext0.r, island.subtext0.g, island.subtext0.b, 0.45)
                 : island.subtext0
@@ -55,7 +55,7 @@ Row {
             Text {
                 anchors.centerIn: parent
                 text: island.isRecordingPaused ? "󰐊" : "󰏤"
-                font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(13)
+                font.family: "SF Pro Text"; font.pixelSize: island.s(13)
                 color: island.isRecordingPaused ? island.green : island.subtext0
                 Behavior on color { ColorAnimation { duration: 150 } }
             }
@@ -78,7 +78,7 @@ Row {
             Behavior on color { ColorAnimation { duration: 120 } }
             Text {
                 anchors.centerIn: parent; text: "■"
-                font.family: "JetBrains Mono"; font.pixelSize: island.s(10); font.weight: Font.Black
+                font.family: "SF Pro Text"; font.pixelSize: island.s(10); font.weight: Font.Black
                 color: island.red
             }
             MouseArea {

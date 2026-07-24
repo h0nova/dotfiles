@@ -48,6 +48,7 @@ PACMAN_PKGS=(
 AUR_PKGS=(
     quickshell-git
     awww
+    ttf-sf-pro
     bibata-cursor-theme-bin
     spotify-launcher
     spicetify-bin

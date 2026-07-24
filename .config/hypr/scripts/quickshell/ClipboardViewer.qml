@@ -180,7 +180,7 @@ PanelWindow {
                     spacing: s(10)
 
                     Text {
-                        text: "󰅍"; font.family: "Iosevka Nerd Font"; font.pixelSize: s(20)
+                        text: "󰅍"; font.family: "SF Pro Text"; font.pixelSize: s(20)
                         color: theme.subtext0; anchors.verticalCenter: parent.verticalCenter
                     }
 
@@ -190,7 +190,7 @@ PanelWindow {
                         Text {
                             visible: searchInput.text.length === 0
                             text: "Search clipboard..."
-                            font.family: "JetBrains Mono"; font.pixelSize: s(15)
+                            font.family: "SF Pro Text"; font.pixelSize: s(15)
                             color: Qt.rgba(theme.subtext0.r, theme.subtext0.g, theme.subtext0.b, 0.4)
                             anchors.verticalCenter: parent.verticalCenter
                         }
@@ -198,7 +198,7 @@ PanelWindow {
                         TextInput {
                             id: searchInput
                             anchors.fill: parent
-                            font.family: "JetBrains Mono"; font.pixelSize: s(15); font.weight: Font.Bold
+                            font.family: "SF Pro Text"; font.pixelSize: s(15); font.weight: Font.Bold
                             color: theme.text
                             verticalAlignment: TextInput.AlignVCenter
                             selectionColor: Qt.rgba(theme.teal.r, theme.teal.g, theme.teal.b, 0.35)
@@ -255,7 +255,7 @@ PanelWindow {
                                 Text {
                                     anchors.centerIn: parent
                                     text: model.isBinary ? "󰋩" : "󰉿"
-                                    font.family: "Iosevka Nerd Font"; font.pixelSize: s(14)
+                                    font.family: "SF Pro Text"; font.pixelSize: s(14)
                                     color: model.isBinary ? theme.mauve : theme.teal
                                 }
                             }
@@ -264,7 +264,7 @@ PanelWindow {
                                 width: parent.width - s(28) - s(10)
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: model.preview
-                                font.family: "JetBrains Mono"
+                                font.family: "SF Pro Text"
                                 font.pixelSize: s(13); font.weight: model.isBinary ? Font.Normal : Font.Medium
                                 color: list.currentIndex === index
                                     ? theme.text

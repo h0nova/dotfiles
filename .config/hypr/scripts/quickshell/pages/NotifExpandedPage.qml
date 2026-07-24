@@ -47,7 +47,7 @@ Item {
                 }
                 Text {
                     anchors.centerIn: parent; text: "󰵙"
-                    font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(20); color: island.peach
+                    font.family: "SF Pro Text"; font.pixelSize: island.s(20); color: island.peach
                     visible: notifIconImg.status !== Image.Ready
                 }
             }
@@ -63,18 +63,18 @@ Item {
                     }
                     Text {
                         text: island.notifData ? (island.notifData.appName || "System") : ""
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(11); font.weight: Font.Medium
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(11); font.weight: Font.Medium
                         color: island.peach; opacity: 0.85; elide: Text.ElideRight; Layout.fillWidth: true
                     }
                 }
                 Text {
                     text: island.notifData ? (island.notifData.title || "") : ""
-                    font.family: "JetBrains Mono"; font.pixelSize: island.s(14); font.weight: Font.Black
+                    font.family: "SF Pro Text"; font.pixelSize: island.s(14); font.weight: Font.Black
                     color: island.text; wrapMode: Text.Wrap; maximumLineCount: 2; elide: Text.ElideRight; Layout.fillWidth: true
                 }
                 Text {
                     text: island.notifData ? (island.notifData.body || "") : ""
-                    font.family: "JetBrains Mono"; font.pixelSize: island.s(11)
+                    font.family: "SF Pro Text"; font.pixelSize: island.s(11)
                     color: island.subtext0; wrapMode: Text.Wrap; maximumLineCount: 2; elide: Text.ElideRight
                     Layout.fillWidth: true; visible: text !== ""
                 }
@@ -90,7 +90,7 @@ Item {
                 border.width: 1
                 border.color: Qt.rgba(island.peach.r, island.peach.g, island.peach.b, notifDismissMouse.containsMouse ? 0.5 : 0.15)
                 Behavior on color { ColorAnimation { duration: 180 } }
-                Text { anchors.centerIn: parent; text: "󰅖"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(11); color: island.subtext0 }
+                Text { anchors.centerIn: parent; text: "󰅖"; font.family: "SF Pro Text"; font.pixelSize: island.s(11); color: island.subtext0 }
                 MouseArea {
                     id: notifDismissMouse; anchors.fill: parent; hoverEnabled: true
                     onClicked: { island.dismissNotif(); mouse.accepted = true }

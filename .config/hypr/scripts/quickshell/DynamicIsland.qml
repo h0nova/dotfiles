@@ -14,7 +14,7 @@ PanelWindow {
     id: islandWindow
 
     WlrLayershell.namespace: "qs-island"
-    WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.layer: islandWindow.fullscreenActive ? WlrLayer.Bottom : WlrLayer.Overlay
 
     anchors { top: true; left: true; right: true }
     exclusionMode: ExclusionMode.Ignore
@@ -110,6 +110,9 @@ PanelWindow {
 
     // Launcher
     property bool launcherActive: false
+
+    // Fullscreen detection
+    property bool fullscreenActive: false
 
     // Discord voice
     property bool discordInCall:     false
@@ -295,17 +298,11 @@ PanelWindow {
             }
         }
     }
-    Timer { interval: 800; running: true; repeat: true; triggeredOnStart: true
-        onTriggered: { musicProc.running = true; eqProc.running = true; } }
-
-    // Watchdog: ensure cavaProc stays in sync with play state (survives reboot/crash)
-    Timer { interval: 1500; running: true; repeat: true; triggeredOnStart: true
-        onTriggered: {
-            let should = islandWindow.isMediaActive && islandWindow.musicData.status === "Playing";
-            if (should && !cavaProc.running)  cavaProc.running = true;
-            if (!should && cavaProc.running) cavaProc.running = false;
-        }
-    }
+    Timer { interval: 500; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: { musicProc.running = true; } }
+    // EQ: only poll when music page is actually open
+    Timer { interval: 2000; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: { if (islandWindow.expanded && islandWindow.currentPage === "music") eqProc.running = true; } }
 
     // CAVA: streams 4 bar values per frame in real-time
     // Note: Quickshell Process.running is imperative, not reactive —
@@ -415,7 +412,7 @@ PanelWindow {
             }
         }
     }
-    Timer { interval: 2000; running: true; repeat: true; triggeredOnStart: true
+    Timer { interval: 5000; running: true; repeat: true; triggeredOnStart: true
         onTriggered: volReadProc.running = true }
 
     Timer {
@@ -447,7 +444,7 @@ PanelWindow {
             }
         }
     }
-    Timer { interval: 3000; running: true; repeat: true; triggeredOnStart: true
+    Timer { interval: 10000; running: true; repeat: true; triggeredOnStart: true
         onTriggered: vpnProc.running = true }
 
     Timer { id: vpnBadgeTimer; interval: 4000; onTriggered: islandWindow.vpnBadgeVisible = false }
@@ -470,7 +467,7 @@ PanelWindow {
             }
         }
     }
-    Timer { interval: 3000; running: true; repeat: true; triggeredOnStart: true
+    Timer { interval: 5000; running: true; repeat: true; triggeredOnStart: true
         onTriggered: discordProc.running = true }
     Timer { interval: 1000; running: islandWindow.discordInCall; repeat: true
         onTriggered: {
@@ -522,8 +519,43 @@ PanelWindow {
             }
         }
     }
-    Timer { interval: 2000; running: true; repeat: true; triggeredOnStart: true
+    Timer { interval: 5000; running: true; repeat: true; triggeredOnStart: true
         onTriggered: recStateProc.running = true }
+
+    // Fullscreen detection — when a fullscreen window is active, drop island behind it
+    Process {
+        id: fullscreenWatcher; running: true
+        command: ["bash", "-c",
+            "sock=\"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock\"; " +
+            "socat - \"UNIX-CONNECT:$sock\" 2>/dev/null | " +
+            "grep --line-buffered -E '^(fullscreen|workspace)>>'"
+        ]
+        stdout: SplitParser {
+            splitMarker: "\n"
+            onRead: (line) => {
+                let trimmed = line.trim();
+                if (trimmed.startsWith("fullscreen>>")) {
+                    islandWindow.fullscreenActive = trimmed.split(">>")[1] === "1";
+                } else if (trimmed.startsWith("workspace>>")) {
+                    fullscreenCheckProc.running = true;
+                }
+            }
+        }
+        onExited: { running = true }
+    }
+    Process {
+        id: fullscreenCheckProc
+        command: ["bash", "-c",
+            "hyprctl activeworkspace -j 2>/dev/null | grep -o '\"hasfullscreen\":[^,}]*' | grep -o '[a-z]*$'"
+        ]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                islandWindow.fullscreenActive = (this.text.trim() === "true");
+            }
+        }
+    }
+    Timer { interval: 500; running: true; repeat: false
+        onTriggered: fullscreenCheckProc.running = true }
 
     // DND state from disk
     Process {
@@ -976,12 +1008,12 @@ PanelWindow {
                 Behavior on opacity { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
                 Text {
                     text: islandWindow.currentVol === 0 ? "󰖁" : (islandWindow.currentVol < 40 ? "󰖀" : "󰕾")
-                    font.family: "Iosevka Nerd Font"; font.pixelSize: s(20)
+                    font.family: "SF Pro Text"; font.pixelSize: s(20)
                     color: "white"; anchors.verticalCenter: parent.verticalCenter
                 }
                 Text {
                     text: islandWindow.currentVol + "%"
-                    font.family: "JetBrains Mono"; font.weight: Font.Black; font.pixelSize: s(19)
+                    font.family: "SF Pro Text"; font.weight: Font.Black; font.pixelSize: s(19)
                     color: "white"; anchors.verticalCenter: parent.verticalCenter
                 }
             }
@@ -1040,7 +1072,7 @@ PanelWindow {
                     width: s(28); height: s(28); radius: s(14)
                     color: leftArrowMouse.containsMouse ? Qt.rgba(islandWindow.surface1.r, islandWindow.surface1.g, islandWindow.surface1.b, 0.7) : "transparent"
                     Behavior on color { ColorAnimation { duration: 150 } }
-                    Text { anchors.centerIn: parent; text: "‹"; font.family: "JetBrains Mono"; font.pixelSize: s(20); font.weight: Font.Black; color: islandWindow.subtext0 }
+                    Text { anchors.centerIn: parent; text: "‹"; font.family: "SF Pro Text"; font.pixelSize: s(20); font.weight: Font.Black; color: islandWindow.subtext0 }
                     MouseArea { id: leftArrowMouse; anchors.fill: parent; hoverEnabled: true; onClicked: islandWindow.navigatePrev() }
                 }
 
@@ -1063,7 +1095,7 @@ PanelWindow {
                     width: s(28); height: s(28); radius: s(14)
                     color: rightArrowMouse.containsMouse ? Qt.rgba(islandWindow.surface1.r, islandWindow.surface1.g, islandWindow.surface1.b, 0.7) : "transparent"
                     Behavior on color { ColorAnimation { duration: 150 } }
-                    Text { anchors.centerIn: parent; text: "›"; font.family: "JetBrains Mono"; font.pixelSize: s(20); font.weight: Font.Black; color: islandWindow.subtext0 }
+                    Text { anchors.centerIn: parent; text: "›"; font.family: "SF Pro Text"; font.pixelSize: s(20); font.weight: Font.Black; color: islandWindow.subtext0 }
                     MouseArea { id: rightArrowMouse; anchors.fill: parent; hoverEnabled: true; onClicked: islandWindow.navigateNext() }
                 }
             }
@@ -1113,7 +1145,7 @@ PanelWindow {
             Text {
                 anchors.centerIn: parent
                 text: notifHistory.count > 9 ? "9+" : (notifHistory.count > 1 ? notifHistory.count.toString() : "󰂚")
-                font.family:  notifHistory.count > 1 ? "JetBrains Mono" : "Iosevka Nerd Font"
+                font.family: "SF Pro Text"
                 font.weight:  notifHistory.count > 1 ? Font.Black : Font.Normal
                 font.pixelSize: notifHistory.count > 1 ? badgeBubble.sz * 0.40 : badgeBubble.sz * 0.48
                 color: islandWindow.peach
@@ -1175,14 +1207,14 @@ PanelWindow {
 
             Text {
                 text: islandWindow.vpnBadgeConnect ? "󰒃" : "󰒄"
-                font.family: "Iosevka Nerd Font"; font.pixelSize: vpnBadge.badgeH * 0.42
+                font.family: "SF Pro Text"; font.pixelSize: vpnBadge.badgeH * 0.42
                 color: islandWindow.vpnBadgeConnect ? islandWindow.green : islandWindow.red
                 anchors.verticalCenter: parent.verticalCenter
                 Behavior on color { ColorAnimation { duration: 250 } }
             }
             Text {
                 text: islandWindow.vpnInterface || "VPN"
-                font.family: "JetBrains Mono"; font.pixelSize: vpnBadge.badgeH * 0.35; font.weight: Font.Bold
+                font.family: "SF Pro Text"; font.pixelSize: vpnBadge.badgeH * 0.35; font.weight: Font.Bold
                 color: islandWindow.vpnBadgeConnect ? islandWindow.green : islandWindow.red
                 anchors.verticalCenter: parent.verticalCenter
                 Behavior on color { ColorAnimation { duration: 250 } }
@@ -1241,7 +1273,7 @@ PanelWindow {
             spacing: s(6)
 
             Text {
-                text: "󰙯"; font.family: "Iosevka Nerd Font"
+                text: "󰙯"; font.family: "SF Pro Text"
                 font.pixelSize: discordBubble.bubbleH * 0.44
                 color: islandWindow.green; anchors.verticalCenter: parent.verticalCenter
             }
@@ -1251,7 +1283,7 @@ PanelWindow {
                     let m = Math.floor(t / 60), s2 = t % 60
                     return (m < 10 ? "0"+m : m) + ":" + (s2 < 10 ? "0"+s2 : s2)
                 }
-                font.family: "JetBrains Mono"; font.pixelSize: discordBubble.bubbleH * 0.36
+                font.family: "SF Pro Text"; font.pixelSize: discordBubble.bubbleH * 0.36
                 font.weight: Font.Bold; color: islandWindow.green
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -1319,7 +1351,7 @@ PanelWindow {
 
             Text {
                 text: islandWindow.isRecordingPaused ? "PAUSED" : "REC"
-                font.family: "JetBrains Mono"
+                font.family: "SF Pro Text"
                 font.pixelSize: recBubble.bubbleH * 0.34
                 font.weight: Font.Black
                 font.letterSpacing: s(1.5)
@@ -1334,7 +1366,7 @@ PanelWindow {
                     let m = Math.floor(t / 60), s2 = t % 60
                     return (m < 10 ? "0"+m : m) + ":" + (s2 < 10 ? "0"+s2 : s2)
                 }
-                font.family: "JetBrains Mono"
+                font.family: "SF Pro Text"
                 font.pixelSize: recBubble.bubbleH * 0.32
                 font.weight: Font.Bold
                 color: islandWindow.subtext0

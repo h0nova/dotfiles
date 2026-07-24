@@ -43,8 +43,15 @@ if [ "$STATUS" = "Playing" ] || [ "$STATUS" = "Paused" ]; then
             touch "$lockFile"
             (
                 trap "rm -f '$lockFile'" EXIT
+                tmpFile="$TMP_DIR/${trackHash}_art.tmp"
                 if [[ "$rawUrl" == http* ]]; then
-                    curl -s -L --max-time 10 -o "$finalArt" "$rawUrl"
+                    curl -s -L --max-time 10 -o "$tmpFile" "$rawUrl"
+                    if [ -s "$tmpFile" ]; then
+                        mv "$tmpFile" "$finalArt"
+                    else
+                        cp "$PLACEHOLDER" "$finalArt"
+                        rm -f "$tmpFile"
+                    fi
                 else
                     cleanPath=$(echo "$rawUrl" | sed 's/file:\/\///g')
                     if [ -f "$cleanPath" ]; then

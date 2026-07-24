@@ -168,7 +168,7 @@ Item {
         delegate: Text {
             id: zz
             text:            ["z","z","Z"][index]
-            font.family:     "JetBrains Mono"
+            font.family: "SF Pro Text"
             font.pixelSize:  root.ps * (2 + index)
             color:           "#9090b0"
             opacity:         0

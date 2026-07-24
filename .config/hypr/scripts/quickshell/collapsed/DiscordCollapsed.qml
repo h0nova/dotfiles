@@ -28,7 +28,7 @@ Row {
         spacing: -1; anchors.verticalCenter: parent.verticalCenter
         Text {
             text: "VOICE"
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Black
+            font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Black
             font.letterSpacing: island.s(2); color: island.green
         }
         Text {
@@ -41,7 +41,7 @@ Row {
                     return (h < 10 ? "0"+h : h) + ":" + (m < 10 ? "0"+m : m) + ":" + (s2 < 10 ? "0"+s2 : s2)
                 return (m < 10 ? "0"+m : m) + ":" + (s2 < 10 ? "0"+s2 : s2)
             }
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(11); font.weight: Font.Bold
+            font.family: "SF Pro Text"; font.pixelSize: island.s(11); font.weight: Font.Bold
             color: Qt.rgba(island.green.r, island.green.g, island.green.b, 0.6)
         }
     }
@@ -49,7 +49,7 @@ Row {
     // Discord icon
     Text {
         text: "󰙯"
-        font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(18)
+        font.family: "SF Pro Text"; font.pixelSize: island.s(18)
         color: Qt.rgba(island.green.r, island.green.g, island.green.b, 0.7)
         anchors.verticalCenter: parent.verticalCenter
     }

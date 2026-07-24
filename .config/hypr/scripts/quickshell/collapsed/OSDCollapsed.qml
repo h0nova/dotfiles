@@ -27,7 +27,7 @@ Item {
         }
         Text {
             text: island.osdValue
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(15); font.weight: Font.Black
+            font.family: "SF Pro Text"; font.pixelSize: island.s(15); font.weight: Font.Black
             color: island.teal
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -56,13 +56,13 @@ Item {
                     if (b < 70) return "󰃟"
                     return "󰃠"
                 }
-                font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(18)
+                font.family: "SF Pro Text"; font.pixelSize: island.s(18)
                 color: island.osdType === "volume" ? island.blue : island.peach
                 anchors.verticalCenter: parent.verticalCenter
             }
             Text {
                 text: (parseInt(island.osdValue) || 0) + "%"
-                font.family: "JetBrains Mono"; font.pixelSize: island.s(15); font.weight: Font.Black
+                font.family: "SF Pro Text"; font.pixelSize: island.s(15); font.weight: Font.Black
                 color: island.osdType === "volume" ? island.blue : island.peach
                 anchors.verticalCenter: parent.verticalCenter
             }

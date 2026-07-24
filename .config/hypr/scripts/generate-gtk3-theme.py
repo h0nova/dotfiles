@@ -38,5 +38,6 @@ wallbash_replacements = [
 ]
 
 wallbash_dir = os.path.expanduser("~/.local/share/themes/Wallbash-Gtk/gtk-3.0")
+os.makedirs(wallbash_dir, exist_ok=True)
 patch(f"{wallbash_dir}/gtk.css.template",      f"{wallbash_dir}/gtk.css",      wallbash_replacements)
 patch(f"{wallbash_dir}/gtk-dark.css.template", f"{wallbash_dir}/gtk-dark.css", wallbash_replacements)

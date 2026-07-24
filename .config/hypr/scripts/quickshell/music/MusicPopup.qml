@@ -100,11 +100,11 @@ Item {
                     Layout.fillWidth: true; spacing: root.s(5)
                     
                     Text {
-                        text: root.musicData.title; font.family: "JetBrains Mono"; font.pixelSize: root.s(20); font.weight: Font.Black; color: text
+                        text: root.musicData.title; font.family: "SF Pro Text"; font.pixelSize: root.s(20); font.weight: Font.Black; color: text
                         elide: Text.ElideRight; Layout.fillWidth: true
                     }
                     Text {
-                        text: root.musicData.artist; font.family: "JetBrains Mono"; font.pixelSize: root.s(14); color: subtext0
+                        text: root.musicData.artist; font.family: "SF Pro Text"; font.pixelSize: root.s(14); color: subtext0
                     }
 
                     // Progress Slider
@@ -118,9 +118,9 @@ Item {
                             handle: Rectangle { x: prog.visualPosition * (prog.width-12); y: (prog.height-12)/2; width: 12; height: 12; radius: 6; color: text }
                         }
                         RowLayout {
-                            Text { text: root.musicData.positionStr; font.family: "JetBrains Mono"; font.pixelSize: root.s(10); color: subtext0 }
+                            Text { text: root.musicData.positionStr; font.family: "SF Pro Text"; font.pixelSize: root.s(10); color: subtext0 }
                             Item { Layout.fillWidth: true }
-                            Text { text: root.musicData.lengthStr; font.family: "JetBrains Mono"; font.pixelSize: root.s(10); color: subtext0 }
+                            Text { text: root.musicData.lengthStr; font.family: "SF Pro Text"; font.pixelSize: root.s(10); color: subtext0 }
                         }
                     }
                 }
@@ -129,13 +129,13 @@ Item {
             // Controls
             RowLayout {
                 Layout.alignment: Qt.AlignHCenter; spacing: root.s(50)
-                Text { text: "󰒮"; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(28); color: text; MouseArea { anchors.fill: parent; onClicked: exec("playerctl previous") } }
+                Text { text: "󰒮"; font.family: "SF Pro Text"; font.pixelSize: root.s(28); color: text; MouseArea { anchors.fill: parent; onClicked: exec("playerctl previous") } }
                 Rectangle {
                     width: root.s(60); height: root.s(60); radius: root.s(30); color: mauve
-                    Text { anchors.centerIn: parent; text: root.musicData.status === "Playing" ? "󰏤" : "󰐊"; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(32); color: base }
+                    Text { anchors.centerIn: parent; text: root.musicData.status === "Playing" ? "󰏤" : "󰐊"; font.family: "SF Pro Text"; font.pixelSize: root.s(32); color: base }
                     MouseArea { anchors.fill: parent; onClicked: exec("playerctl play-pause") }
                 }
-                Text { text: "󰒭"; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(28); color: text; MouseArea { anchors.fill: parent; onClicked: exec("playerctl next") } }
+                Text { text: "󰒭"; font.family: "SF Pro Text"; font.pixelSize: root.s(28); color: text; MouseArea { anchors.fill: parent; onClicked: exec("playerctl next") } }
             }
 
             // Minimalist Equalizer
@@ -143,8 +143,8 @@ Item {
                 Layout.fillWidth: true; spacing: root.s(15)
                 
                 RowLayout {
-                    Text { text: "Audio Equalizer"; font.family: "JetBrains Mono"; font.pixelSize: root.s(14); font.bold: true; color: mauve; Layout.fillWidth: true }
-                    Text { text: root.eqData.preset; font.family: "JetBrains Mono"; font.pixelSize: root.s(12); color: subtext0 }
+                    Text { text: "Audio Equalizer"; font.family: "SF Pro Text"; font.pixelSize: root.s(14); font.bold: true; color: mauve; Layout.fillWidth: true }
+                    Text { text: root.eqData.preset; font.family: "SF Pro Text"; font.pixelSize: root.s(12); color: subtext0 }
                 }
 
                 Row {
@@ -169,7 +169,7 @@ Item {
                         model: ["Flat", "Bass", "Treble", "Rock", "Pop"]
                         delegate: Rectangle {
                             Layout.fillWidth: true; height: root.s(32); radius: 8; color: root.eqData.preset === modelData ? mauve : surface0
-                            Text { anchors.centerIn: parent; text: modelData; font.family: "JetBrains Mono"; font.pixelSize: root.s(11); color: root.eqData.preset === modelData ? base : text }
+                            Text { anchors.centerIn: parent; text: modelData; font.family: "SF Pro Text"; font.pixelSize: root.s(11); color: root.eqData.preset === modelData ? base : text }
                             MouseArea { anchors.fill: parent; onClicked: exec(`~/.config/hypr/scripts/quickshell/music/equalizer.sh preset ${modelData}`) }
                         }
                     }

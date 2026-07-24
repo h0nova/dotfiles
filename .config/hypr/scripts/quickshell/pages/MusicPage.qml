@@ -41,12 +41,12 @@ Item {
 
                     Text {
                         text: island.musicData.title || "Unknown"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(20); font.weight: Font.Black
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(20); font.weight: Font.Black
                         color: island.text; elide: Text.ElideRight; Layout.fillWidth: true
                     }
                     Text {
                         text: island.musicData.artist || "—"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(13)
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(13)
                         color: island.subtext0; elide: Text.ElideRight; Layout.fillWidth: true
                     }
                     Item { Layout.fillHeight: true }
@@ -84,9 +84,9 @@ Item {
 
                     RowLayout {
                         Layout.fillWidth: true
-                        Text { text: island.musicData.positionStr || "00:00"; font.family: "JetBrains Mono"; font.pixelSize: island.s(10); color: island.subtext0 }
+                        Text { text: island.musicData.positionStr || "00:00"; font.family: "SF Pro Text"; font.pixelSize: island.s(10); color: island.subtext0 }
                         Item { Layout.fillWidth: true }
-                        Text { text: island.musicData.lengthStr || "00:00"; font.family: "JetBrains Mono"; font.pixelSize: island.s(10); color: island.subtext0 }
+                        Text { text: island.musicData.lengthStr || "00:00"; font.family: "SF Pro Text"; font.pixelSize: island.s(10); color: island.subtext0 }
                     }
                 }
             }
@@ -100,7 +100,7 @@ Item {
                     Layout.preferredWidth: island.s(44); Layout.preferredHeight: island.s(44); radius: island.s(22)
                     color: prevMouse.containsMouse ? island.surface1 : Qt.rgba(island.surface0.r, island.surface0.g, island.surface0.b, 0.6)
                     Behavior on color { ColorAnimation { duration: 180 } }
-                    Text { anchors.centerIn: parent; text: "󰒮"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(22); color: island.text }
+                    Text { anchors.centerIn: parent; text: "󰒮"; font.family: "SF Pro Text"; font.pixelSize: island.s(22); color: island.text }
                     MouseArea { id: prevMouse; anchors.fill: parent; hoverEnabled: true; onClicked: island.exec("playerctl previous") }
                 }
 
@@ -111,7 +111,7 @@ Item {
                     Behavior on scale { NumberAnimation { duration: 180; easing.type: Easing.OutBack } }
                     layer.enabled: true
                     layer.effect: MultiEffect { shadowEnabled: true; shadowColor: island.mauve; shadowOpacity: 0.4; shadowBlur: 0.8 }
-                    Text { anchors.centerIn: parent; text: island.musicData.status === "Playing" ? "󰏤" : "󰐊"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(28); color: island.base }
+                    Text { anchors.centerIn: parent; text: island.musicData.status === "Playing" ? "󰏤" : "󰐊"; font.family: "SF Pro Text"; font.pixelSize: island.s(28); color: island.base }
                     MouseArea { id: playMouse; anchors.fill: parent; hoverEnabled: true; onClicked: island.exec("playerctl play-pause") }
                 }
 
@@ -119,7 +119,7 @@ Item {
                     Layout.preferredWidth: island.s(44); Layout.preferredHeight: island.s(44); radius: island.s(22)
                     color: nextMouse.containsMouse ? island.surface1 : Qt.rgba(island.surface0.r, island.surface0.g, island.surface0.b, 0.6)
                     Behavior on color { ColorAnimation { duration: 180 } }
-                    Text { anchors.centerIn: parent; text: "󰒭"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(22); color: island.text }
+                    Text { anchors.centerIn: parent; text: "󰒭"; font.family: "SF Pro Text"; font.pixelSize: island.s(22); color: island.text }
                     MouseArea { id: nextMouse; anchors.fill: parent; hoverEnabled: true; onClicked: island.exec("playerctl next") }
                 }
             }
@@ -129,7 +129,7 @@ Item {
                 Layout.fillWidth: true
                 Text {
                     text: "EQUALIZER"
-                    font.family: "JetBrains Mono"; font.pixelSize: island.s(11); font.weight: Font.Black; font.letterSpacing: 2
+                    font.family: "SF Pro Text"; font.pixelSize: island.s(11); font.weight: Font.Black; font.letterSpacing: 2
                     color: island.mauve; Layout.fillWidth: true
                 }
                 Rectangle {
@@ -141,7 +141,7 @@ Item {
                     Text {
                         id: presetLabel; anchors.centerIn: parent
                         text: island.eqData.preset || "Flat"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(10); font.weight: Font.Bold
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(10); font.weight: Font.Bold
                         color: island.mauve
                     }
                 }
@@ -160,7 +160,7 @@ Item {
                         Text {
                             Layout.alignment: Qt.AlignHCenter
                             text: { let v = island.eqData["b" + (index + 1)] || 0; return v > 0 ? "+" + v : "" + v }
-                            font.family: "JetBrains Mono"; font.pixelSize: island.s(8)
+                            font.family: "SF Pro Text"; font.pixelSize: island.s(8)
                             color: Math.abs(island.eqData["b" + (index + 1)] || 0) > 0 ? island.mauve : island.subtext0
                         }
                         Item {
@@ -209,7 +209,7 @@ Item {
                         Text {
                             Layout.alignment: Qt.AlignHCenter
                             text: ["32","64","125","250","500","1K","2K","4K","8K","16K"][index]
-                            font.family: "JetBrains Mono"; font.pixelSize: island.s(8)
+                            font.family: "SF Pro Text"; font.pixelSize: island.s(8)
                             color: island.subtext0
                         }
                     }
@@ -235,7 +235,7 @@ Item {
                             : Qt.rgba(island.text.r, island.text.g, island.text.b, 0.08)
                         Text {
                             anchors.centerIn: parent; text: modelData
-                            font.family: "JetBrains Mono"; font.pixelSize: island.s(10); font.weight: Font.Bold
+                            font.family: "SF Pro Text"; font.pixelSize: island.s(10); font.weight: Font.Bold
                             color: parent.isActive ? island.base : island.text
                         }
                         MouseArea {

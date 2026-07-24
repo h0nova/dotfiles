@@ -26,8 +26,8 @@ Row {
     // Title + artist
     ColumnLayout {
         spacing: -2; anchors.verticalCenter: parent.verticalCenter
-        Text { text: island.musicData.title || "Unknown"; font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Black; color: island.text; Layout.maximumWidth: island.s(160); elide: Text.ElideRight }
-        Text { text: island.musicData.artist || ""; visible: !!island.musicData.artist; font.family: "JetBrains Mono"; font.pixelSize: island.s(10); color: island.subtext0; Layout.maximumWidth: island.s(160); elide: Text.ElideRight }
+        Text { text: island.musicData.title || "Unknown"; font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Black; color: island.text; Layout.maximumWidth: island.s(160); elide: Text.ElideRight }
+        Text { text: island.musicData.artist || ""; visible: !!island.musicData.artist; font.family: "SF Pro Text"; font.pixelSize: island.s(10); color: island.subtext0; Layout.maximumWidth: island.s(160); elide: Text.ElideRight }
     }
 
     // Playback controls
@@ -37,21 +37,21 @@ Row {
             width: island.s(22); height: island.s(22); radius: island.s(11)
             color: prevM.containsMouse ? Qt.rgba(island.surface1.r, island.surface1.g, island.surface1.b, 0.7) : "transparent"
             Behavior on color { ColorAnimation { duration: 120 } }
-            Text { anchors.centerIn: parent; text: "󰒮"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(13); color: island.subtext0 }
+            Text { anchors.centerIn: parent; text: "󰒮"; font.family: "SF Pro Text"; font.pixelSize: island.s(13); color: island.subtext0 }
             MouseArea { id: prevM; anchors.fill: parent; hoverEnabled: true; onClicked: { island.exec("playerctl previous"); mouse.accepted = true } }
         }
         Rectangle {
             width: island.s(26); height: island.s(26); radius: island.s(13)
             color: playM.containsMouse ? Qt.rgba(island.mauve.r, island.mauve.g, island.mauve.b, 0.22) : Qt.rgba(island.surface0.r, island.surface0.g, island.surface0.b, 0.5)
             Behavior on color { ColorAnimation { duration: 120 } }
-            Text { anchors.centerIn: parent; text: island.musicData.status === "Playing" ? "󰏤" : "󰐊"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(14); color: island.text }
+            Text { anchors.centerIn: parent; text: island.musicData.status === "Playing" ? "󰏤" : "󰐊"; font.family: "SF Pro Text"; font.pixelSize: island.s(14); color: island.text }
             MouseArea { id: playM; anchors.fill: parent; hoverEnabled: true; onClicked: { island.exec("playerctl play-pause"); mouse.accepted = true } }
         }
         Rectangle {
             width: island.s(22); height: island.s(22); radius: island.s(11)
             color: nextM.containsMouse ? Qt.rgba(island.surface1.r, island.surface1.g, island.surface1.b, 0.7) : "transparent"
             Behavior on color { ColorAnimation { duration: 120 } }
-            Text { anchors.centerIn: parent; text: "󰒭"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(13); color: island.subtext0 }
+            Text { anchors.centerIn: parent; text: "󰒭"; font.family: "SF Pro Text"; font.pixelSize: island.s(13); color: island.subtext0 }
             MouseArea { id: nextM; anchors.fill: parent; hoverEnabled: true; onClicked: { island.exec("playerctl next"); mouse.accepted = true } }
         }
     }

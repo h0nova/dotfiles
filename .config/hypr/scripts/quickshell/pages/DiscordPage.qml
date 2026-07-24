@@ -25,7 +25,7 @@ Item {
             }
             Text {
                 anchors.centerIn: parent; text: "󰍬"
-                font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(32)
+                font.family: "SF Pro Text"; font.pixelSize: island.s(32)
                 color: island.green
             }
         }
@@ -42,14 +42,14 @@ Item {
                     return (h < 10 ? "0"+h : h) + ":" + (m < 10 ? "0"+m : m) + ":" + (s2 < 10 ? "0"+s2 : s2)
                 return (m < 10 ? "0"+m : m) + ":" + (s2 < 10 ? "0"+s2 : s2)
             }
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(28); font.weight: Font.Black
+            font.family: "SF Pro Text"; font.pixelSize: island.s(28); font.weight: Font.Black
             color: island.green
         }
 
         Text {
             Layout.alignment: Qt.AlignHCenter
             text: "Voice Call · Discord"
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(11)
+            font.family: "SF Pro Text"; font.pixelSize: island.s(11)
             color: island.subtext0
         }
 
@@ -65,11 +65,11 @@ Item {
             Row {
                 anchors.centerIn: parent; spacing: island.s(6)
                 Text {
-                    text: "󰍭"; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(16)
+                    text: "󰍭"; font.family: "SF Pro Text"; font.pixelSize: island.s(16)
                     color: island.subtext0; anchors.verticalCenter: parent.verticalCenter
                 }
                 Text {
-                    text: "Mute mic"; font.family: "JetBrains Mono"
+                    text: "Mute mic"; font.family: "SF Pro Text"
                     font.pixelSize: island.s(12); font.weight: Font.Bold
                     color: island.subtext0; anchors.verticalCenter: parent.verticalCenter
                 }

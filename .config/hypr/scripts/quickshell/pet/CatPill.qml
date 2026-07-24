@@ -150,7 +150,7 @@ Item {
     Text {
         visible:        root.showQuestion && !root.notifActive
         text:           "?"
-        font.family:    "JetBrains Mono"
+        font.family: "SF Pro Text"
         font.pixelSize: 9
         font.weight:    Font.Black
         color:          root.catColor
@@ -168,7 +168,7 @@ Item {
     Text {
         visible:        root.notifActive
         text:           "!"
-        font.family:    "JetBrains Mono"
+        font.family: "SF Pro Text"
         font.pixelSize: 9
         font.weight:    Font.Black
         color:          root.catColor

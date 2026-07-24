@@ -152,7 +152,7 @@ PanelWindow {
             Text {
                 anchors.centerIn: parent
                 text: root.isVideoMode ? "Select region to record" : "Select region to capture"
-                font.family: "JetBrains Mono"; font.weight: Font.DemiBold; font.pixelSize: s(24)
+                font.family: "SF Pro Text"; font.weight: Font.DemiBold; font.pixelSize: s(24)
                 color: _theme.text
             }
         }
@@ -364,7 +364,7 @@ PanelWindow {
                         color: !root.isVideoMode ? _theme.surface2 : "transparent"
                         Behavior on color { ColorAnimation { duration: 200 } }
                         
-                        Text { anchors.centerIn: parent; font.family: "Iosevka Nerd Font"; text: "󰄄"; color: !root.isVideoMode ? _theme.text : _theme.subtext0; font.pixelSize: s(16) }
+                        Text { anchors.centerIn: parent; font.family: "SF Pro Text"; text: "󰄄"; color: !root.isVideoMode ? _theme.text : _theme.subtext0; font.pixelSize: s(16) }
                         MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: root.isVideoMode = false }
                     }
                     
@@ -373,7 +373,7 @@ PanelWindow {
                         color: root.isVideoMode ? _theme.surface2 : "transparent"
                         Behavior on color { ColorAnimation { duration: 200 } }
                         
-                        Text { anchors.centerIn: parent; font.family: "Iosevka Nerd Font"; text: ""; color: root.isVideoMode ? _theme.text : _theme.subtext0; font.pixelSize: s(16) }
+                        Text { anchors.centerIn: parent; font.family: "SF Pro Text"; text: ""; color: root.isVideoMode ? _theme.text : _theme.subtext0; font.pixelSize: s(16) }
                         MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: root.isVideoMode = true }
                     }
                 }
@@ -398,8 +398,8 @@ PanelWindow {
                 RowLayout {
                     anchors.centerIn: parent
                     spacing: s(6)
-                    Text { font.family: "Iosevka Nerd Font"; text: parent.parent.iconTxt; color: parent.parent.isDanger ? _theme.red : _theme.text; font.pixelSize: s(18) }
-                    Text { id: txt; visible: parent.parent.label !== ""; font.family: "JetBrains Mono"; font.weight: Font.DemiBold; text: parent.parent.label; color: parent.parent.isDanger ? _theme.red : _theme.text; font.pixelSize: s(13) }
+                    Text { font.family: "SF Pro Text"; text: parent.parent.iconTxt; color: parent.parent.isDanger ? _theme.red : _theme.text; font.pixelSize: s(18) }
+                    Text { id: txt; visible: parent.parent.label !== ""; font.family: "SF Pro Text"; font.weight: Font.DemiBold; text: parent.parent.label; color: parent.parent.isDanger ? _theme.red : _theme.text; font.pixelSize: s(13) }
                 }
                 MouseArea { id: ma; anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor; onClicked: parent.clicked() }
             }

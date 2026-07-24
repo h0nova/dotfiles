@@ -34,7 +34,7 @@ Row {
         Text {
             visible: notifIcon.status !== Image.Ready
             anchors.centerIn: parent; text: "󰵙"
-            font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(14); color: island.peach
+            font.family: "SF Pro Text"; font.pixelSize: island.s(14); color: island.peach
         }
     }
 
@@ -47,7 +47,7 @@ Row {
                       : (island.notifActive ? island.notifData : null)
                 return n ? (n.appName || "System") : "System"
             }
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(10); font.weight: Font.Medium
+            font.family: "SF Pro Text"; font.pixelSize: island.s(10); font.weight: Font.Medium
             color: island.peach; elide: Text.ElideRight; Layout.maximumWidth: island.s(160)
         }
         Text {
@@ -56,7 +56,7 @@ Row {
                       : (island.notifActive ? island.notifData : null)
                 return n ? (n.title || n.body || "") : ""
             }
-            font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Black
+            font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Black
             color: island.text; elide: Text.ElideRight; Layout.maximumWidth: island.s(160)
         }
     }

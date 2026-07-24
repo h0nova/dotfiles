@@ -21,11 +21,18 @@ main() {
     fastfetch 2>/dev/null || neofetch 2>/dev/null || true
     echo
 
-    # count updates
+    # count updates (checkupdates syncs a temp db copy, so it's accurate
+    # even if the real pacman sync db is stale — unlike plain `pacman -Qu`)
     local pacman_count aur_count
-    pacman_count=$(pacman -Qu 2>/dev/null | wc -l)
+    if command -v checkupdates &>/dev/null; then
+        pacman_count=$(checkupdates 2>/dev/null | wc -l)
+    else
+        pacman_count=$(pacman -Qu 2>/dev/null | wc -l)
+    fi
+    aur_count=$(yay -Qua 2>/dev/null | wc -l)
     printf '\e[1;32m Updates available:\e[0m\n'
     printf '  \e[0;37m󰏖  Pacman + Chaotic-AUR:\e[0m \e[1m%s\e[0m\n' "$pacman_count"
+    printf '  \e[0;37m󰏖  AUR:\e[0m \e[1m%s\e[0m\n' "$aur_count"
     echo
 
     # --- simulate command typing ---
@@ -35,6 +42,10 @@ main() {
     echo
     sudo pacman -Syu
     echo
+
+    # refresh the waybar module (signal 8) so the bar count updates now,
+    # instead of waiting up to `interval` seconds for the next poll
+    pkill -RTMIN+8 waybar 2>/dev/null
 
     printf '\e[1;32m Done! Press any key...\e[0m'
     read -r -n 1

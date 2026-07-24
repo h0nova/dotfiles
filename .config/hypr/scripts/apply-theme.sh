@@ -7,6 +7,7 @@ set -e
 
 QS_COLORS="$HOME/.config/hypr/scripts/quickshell/qs_colors.json"
 QS_USER="$HOME/.config/hypr/scripts/quickshell/qs_colors.user.json"
+THEME_STATE="$HOME/.cache/theme_wallpaper_state"
 
 WALLPAPER="${1:-}"
 
@@ -24,6 +25,10 @@ if [ "$WALLPAPER" != "--reload" ]; then
     echo "Generating colors from: $WALLPAPER"
     # matugen generates all configs + sets wallpaper via awww (see config.toml)
     matugen -m dark --prefer=saturation image "$WALLPAPER"
+    # Remember which wallpaper the current theme was generated from, so
+    # theme_sync_watcher.sh can detect when the wallpaper is changed by
+    # some other means (e.g. `awww img` directly) without regenerating colors.
+    realpath "$WALLPAPER" > "$THEME_STATE"
 else
     # Reload: re-run matugen templates without regenerating colors
     matugen -m dark --prefer=saturation image --skip-wallpaper "$QS_COLORS" 2>/dev/null || \
@@ -52,6 +57,13 @@ fi
 # Wallbash-Gtk GTK3 theme (HyDE base with dynamic palette)
 if python3 "$HOME/.config/hypr/scripts/generate-gtk3-theme.py" 2>/dev/null; then
     echo "Wallbash-Gtk GTK3 theme generated"
+    # Sync to gsettings so nwg-look and GTK4 apps pick up the theme
+    gsettings set org.gnome.desktop.interface gtk-theme        'Wallbash-Gtk'            2>/dev/null || true
+    gsettings set org.gnome.desktop.interface icon-theme       'Tela-circle-dark'         2>/dev/null || true
+    gsettings set org.gnome.desktop.interface font-name        'JetBrainsMono Nerd Font 11' 2>/dev/null || true
+    gsettings set org.gnome.desktop.interface cursor-theme     'Bibata-Modern-Ice'        2>/dev/null || true
+    gsettings set org.gnome.desktop.interface cursor-size      24                         2>/dev/null || true
+    gsettings set org.gnome.desktop.interface color-scheme     'prefer-dark'              2>/dev/null || true
     pkill xsettingsd 2>/dev/null; xsettingsd &
 fi
 

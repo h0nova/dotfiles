@@ -43,7 +43,7 @@ Item {
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: island.isRecordingPaused ? "PAUSED" : "RECORDING"
-                font.family: "JetBrains Mono"
+                font.family: "SF Pro Text"
                 font.pixelSize: island.s(13)
                 font.weight: Font.Black
                 font.letterSpacing: island.s(3)
@@ -65,7 +65,7 @@ Item {
                     return (m  < 10 ? "0" + m  : m)  + ":"
                          + (s2 < 10 ? "0" + s2 : s2);
                 }
-                font.family: "JetBrains Mono"
+                font.family: "SF Pro Text"
                 font.pixelSize: island.s(38)
                 font.weight: Font.Black
                 color: island.isRecordingPaused
@@ -94,14 +94,14 @@ Item {
                     anchors.centerIn: parent; spacing: island.s(7)
                     Text {
                         text: island.isRecordingPaused ? "󰐊" : "󰏤"
-                        font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(16)
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(16)
                         color: island.isRecordingPaused ? island.green : island.text
                         anchors.verticalCenter: parent.verticalCenter
                         Behavior on color { ColorAnimation { duration: 200 } }
                     }
                     Text {
                         text: island.isRecordingPaused ? "Resume" : "Pause"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Bold
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Bold
                         color: island.isRecordingPaused ? island.green : island.text
                         anchors.verticalCenter: parent.verticalCenter
                         Behavior on color { ColorAnimation { duration: 200 } }
@@ -133,12 +133,12 @@ Item {
                     anchors.centerIn: parent; spacing: island.s(7)
                     Text {
                         text: "■"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Black
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Black
                         color: island.red; anchors.verticalCenter: parent.verticalCenter
                     }
                     Text {
                         text: "Stop"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(13); font.weight: Font.Bold
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(13); font.weight: Font.Bold
                         color: island.red; anchors.verticalCenter: parent.verticalCenter
                     }
                 }

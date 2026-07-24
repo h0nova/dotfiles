@@ -122,7 +122,7 @@ noto-fonts-emoji ttf-jetbrains-mono-nerd
 ### AUR
 
 ```
-quickshell-git awww bibata-cursor-theme-bin
+quickshell-git awww ttf-sf-pro bibata-cursor-theme-bin
 spotify-launcher spicetify-bin oh-my-zsh-git zsh-completions
 ```
 

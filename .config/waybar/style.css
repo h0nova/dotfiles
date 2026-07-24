@@ -6,8 +6,8 @@
    RESET
    ═══════════════════════════════════════════════════════════ */
 * {
-    font-family: "JetBrains Mono", "Iosevka Nerd Font", monospace;
-    font-size: 12px;
+    font-family: "SF Mono", "JetBrainsMono Nerd Font", "JetBrainsMono NF", monospace;
+    font-size: 14px;
     font-weight: 500;
     border: none;
     border-radius: 0;
@@ -50,50 +50,45 @@ window#waybar > box {
 /* ═══════════════════════════════════════════════════════════
    GROUP 1 — HARDWARE
    ═══════════════════════════════════════════════════════════ */
+#cpu,
 #temperature-cpu,
-#custom-gpu,
-#memory,
-#battery {
-    padding: 0 10px;
+#custom-gpu-util,
+#custom-gpu-temp,
+#memory {
     color: @subtext0;
 }
 
-#temperature-cpu.critical {
+#temperature-cpu.critical,
+#cpu.high {
     color: @red;
     font-weight: 700;
 }
 
-#battery.charging,
-#battery.plugged {
-    color: @accent;
-}
-
-#battery.full {
-    color: @green;
-}
-
-#battery.warning:not(.charging) {
-    color: @peach;
-}
-
-#battery.critical:not(.charging) {
-    color: @red;
-    font-weight: 700;
+/* CPU section: % and temp sit together, no internal divider */
+#cpu {
+    padding: 0 4px 0 11px;
 }
 
 #temperature-cpu {
-    border-right: 1px solid @accent_10;
-    padding-right: 12px;
+    padding: 0 0px 0 4px;
 }
 
-#custom-gpu {
-    border-right: 1px solid @accent_10;
-    padding-right: 12px;
+/* GPU section: same pattern */
+#custom-gpu-util {
+    padding: 0 4px 0 11px;
+    border-left: 1px solid @accent_10;
+    margin-left: 11px;
 }
 
+#custom-gpu-temp {
+    padding: 0 11px 0 4px;
+
+}
+
+/* Memory: last item, border-left creates the divider */
 #memory {
-    border-right: 1px solid @accent_10;
-    padding-right: 12px;
+    padding: 0 11px;
+    border-left: 1px solid @accent_10;
 }
 
 /* ═══════════════════════════════════════════════════════════

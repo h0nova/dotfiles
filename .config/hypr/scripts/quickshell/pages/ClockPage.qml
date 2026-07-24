@@ -18,13 +18,13 @@ Item {
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: island.timeStrSec
-                font.family: "JetBrains Mono"; font.pixelSize: island.s(50); font.weight: Font.Black
+                font.family: "SF Pro Text"; font.pixelSize: island.s(50); font.weight: Font.Black
                 color: island.text
             }
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: island.dateStr
-                font.family: "JetBrains Mono"; font.pixelSize: island.s(15); font.weight: Font.Medium
+                font.family: "SF Pro Text"; font.pixelSize: island.s(15); font.weight: Font.Medium
                 color: island.subtext0
             }
 
@@ -41,19 +41,19 @@ Item {
 
                 Text {
                     text: island.weatherIcon || "󰖔"
-                    font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(36)
+                    font.family: "SF Pro Text"; font.pixelSize: island.s(36)
                     color: island.mauve
                 }
                 ColumnLayout {
                     spacing: island.s(2)
                     Text {
                         text: island.weatherTemp
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(24); font.weight: Font.Black
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(24); font.weight: Font.Black
                         color: island.peach
                     }
                     Text {
                         text: island.weatherTemp === "--°" ? "No data" : "Weather now"
-                        font.family: "JetBrains Mono"; font.pixelSize: island.s(11)
+                        font.family: "SF Pro Text"; font.pixelSize: island.s(11)
                         color: island.subtext0
                     }
                 }

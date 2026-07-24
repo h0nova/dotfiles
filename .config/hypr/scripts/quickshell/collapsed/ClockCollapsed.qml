@@ -9,8 +9,8 @@ Row {
 
     ColumnLayout {
         spacing: -2; anchors.verticalCenter: parent.verticalCenter
-        Text { text: island.timeStr; font.family: "JetBrains Mono"; font.pixelSize: island.s(16); font.weight: Font.Black; color: island.blue }
-        Text { text: island.dateStr; font.family: "JetBrains Mono"; font.pixelSize: island.s(11); font.weight: Font.Bold; color: island.subtext0 }
+        Text { text: island.timeStr; font.family: "SF Pro Text"; font.pixelSize: island.s(16); font.weight: Font.DemiBold; color: island.blue }
+        Text { text: island.dateStr; font.family: "SF Pro Text"; font.pixelSize: island.s(11); font.weight: Font.Medium; color: island.subtext0 }
     }
 
     Column {
@@ -18,8 +18,8 @@ Row {
 
         Row {
             spacing: island.s(6); anchors.horizontalCenter: parent.horizontalCenter
-            Text { text: island.weatherIcon; visible: island.weatherIcon !== ""; font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(20); color: island.mauve }
-            Text { text: island.weatherTemp; visible: island.weatherTemp !== "--°"; font.family: "JetBrains Mono"; font.pixelSize: island.s(14); font.weight: Font.Black; color: island.peach }
+            Text { text: island.weatherIcon; visible: island.weatherIcon !== ""; font.family: "SF Pro Text"; font.pixelSize: island.s(20); color: island.mauve }
+            Text { text: island.weatherTemp; visible: island.weatherTemp !== "--°"; font.family: "SF Pro Text"; font.pixelSize: island.s(14); font.weight: Font.DemiBold; color: island.peach }
         }
 
         // VPN lock — snap-shut animation, shown under temperature
@@ -54,7 +54,7 @@ Row {
                 id: lockIcon
                 anchors.centerIn: parent
                 text: lockItem._lockClosed ? "󰒃" : "󰒄"
-                font.family: "Iosevka Nerd Font"; font.pixelSize: island.s(11)
+                font.family: "SF Pro Text"; font.pixelSize: island.s(11)
                 color: island.green
             }
         }
