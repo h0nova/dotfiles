@@ -122,9 +122,18 @@ noto-fonts-emoji ttf-jetbrains-mono-nerd
 ### AUR
 
 ```
-quickshell-git awww ttf-sf-pro bibata-cursor-theme-bin
+quickshell-git awww bibata-cursor-theme-bin
 spotify-launcher spicetify-bin oh-my-zsh-git zsh-completions
 ```
+
+### Fonts (SF Pro / SF Mono / SF Compact / New York)
+
+These are Apple's proprietary fonts — not in any pacman/AUR package and not
+tracked in this repo (too large, not redistributable). Before running
+`install.sh` on a new machine, copy your own `for-arch` font folder into
+`fonts/for-arch/` here. `install.sh` will install them into
+`~/.local/share/fonts` and refresh the font cache; if the folder is missing
+it just warns and skips that step.
 
 ---
 

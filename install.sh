@@ -48,7 +48,6 @@ PACMAN_PKGS=(
 AUR_PKGS=(
     quickshell-git
     awww
-    ttf-sf-pro
     bibata-cursor-theme-bin
     spotify-launcher
     spicetify-bin
@@ -104,7 +103,23 @@ cp    "$DOTS/.zshrc"              "$HOME/.zshrc"
 mkdir -p "$HOME/Pictures/Wallpapers"
 ok "Dotfiles copied"
 
-# ── 5. Replace hardcoded username ─────────────────────────────────────────────
+# ── 5. Install bundled fonts (SF Pro / SF Mono / SF Compact / New York) ────────
+section "Installing fonts"
+
+FONTS_SRC="$DOTS/fonts/for-arch"
+
+if [[ -d "$FONTS_SRC" ]]; then
+    mkdir -p "$HOME/.local/share/fonts"
+    cp -r "$FONTS_SRC" "$HOME/.local/share/fonts/"
+    fc-cache -f "$HOME/.local/share/fonts" >/dev/null 2>&1 || true
+    ok "SF/New York fonts installed to ~/.local/share/fonts"
+else
+    warn "$FONTS_SRC not found — these are Apple fonts, not tracked in git"
+    warn "Copy your 'for-arch' font folder into $DOTS/fonts/ and re-run this"
+    warn "script (or just: cp -r for-arch ~/.local/share/fonts/ && fc-cache -f)"
+fi
+
+# ── 6. Replace hardcoded username ─────────────────────────────────────────────
 section "Patching paths for user: $(whoami)"
 
 OLD_HOME="/home/h0nova"
@@ -132,7 +147,7 @@ else
     ok "Same username — no patching needed"
 fi
 
-# ── 6. Spicetify setup ─────────────────────────────────────────────────────────
+# ── 7. Spicetify setup ─────────────────────────────────────────────────────────
 section "Setting up Spicetify"
 
 SPOTIFY_PATH="$HOME/.local/share/spotify-launcher/install/usr/share/spotify"
@@ -159,7 +174,7 @@ else
     warn "Spotify not installed — skipping Spicetify setup"
 fi
 
-# ── 7. Set up Zsh ──────────────────────────────────────────────────────────────
+# ── 8. Set up Zsh ──────────────────────────────────────────────────────────────
 section "Configuring Zsh"
 
 if [[ "$SHELL" != "$(which zsh)" ]]; then
@@ -168,7 +183,7 @@ if [[ "$SHELL" != "$(which zsh)" ]]; then
     ok "Default shell changed to zsh (takes effect on next login)"
 fi
 
-# ── 8. Cursor theme ────────────────────────────────────────────────────────────
+# ── 9. Cursor theme ────────────────────────────────────────────────────────────
 section "Applying cursor theme"
 
 mkdir -p "$HOME/.icons/default"
@@ -183,7 +198,7 @@ gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice' 2>/de
 gsettings set org.gnome.desktop.interface cursor-size 24 2>/dev/null || true
 ok "Cursor theme set"
 
-# ── 9. Calendar .env template ──────────────────────────────────────────────────
+# ── 10. Calendar .env template ──────────────────────────────────────────────────
 section "Weather API setup"
 
 ENV_FILE="$HOME/.config/hypr/scripts/quickshell/calendar/.env"
@@ -198,7 +213,7 @@ EOF
     warn "  $ENV_FILE"
 fi
 
-# ── 10. Apply initial theme ────────────────────────────────────────────────────
+# ── 11. Apply initial theme ────────────────────────────────────────────────────
 section "Applying initial theme"
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
@@ -224,7 +239,11 @@ echo ""
 echo "  Next steps:"
 echo "  1. Log out and log back in (or restart)"
 echo "  2. Add wallpapers to ~/Pictures/Wallpapers/"
-echo "  3. Fill in OpenWeather API key in:"
+if [[ ! -d "$FONTS_SRC" ]]; then
+echo "  3. Copy your 'for-arch' Apple font folder into $DOTS/fonts/"
+echo "     and re-run install.sh (not tracked in git — see fonts/ in .gitignore)"
+fi
+echo "  4. Fill in OpenWeather API key in:"
 echo "     ~/.config/hypr/scripts/quickshell/calendar/.env"
-echo "  4. Run: apply-theme.sh ~/Pictures/Wallpapers/your-wallpaper.jpg"
+echo "  5. Run: apply-theme.sh ~/Pictures/Wallpapers/your-wallpaper.jpg"
 echo -e "${NC}"

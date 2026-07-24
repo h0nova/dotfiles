@@ -27,3 +27,7 @@ __pycache__/
 
 # Backup
 .dotfiles-backup/
+
+# Apple fonts (SF Pro/SF Mono/SF Compact/New York) — proprietary, not
+# redistributable, too large for git. Copy manually before running install.sh.
+fonts/
